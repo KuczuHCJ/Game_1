@@ -57,13 +57,34 @@ class Program
             Console.ResetColor();
 
             //wpisuwanie przez graczy wartości
-            nowa_linia();
-            Console.WriteLine("gracz pierwszy:");
-            int a = Convert.ToInt32(Console.ReadLine());
-            nowa_linia();
+                        Console.WriteLine("gracz pierwszy:");
+            string a_to_parse = (Console.ReadLine());
+            if (int.TryParse(a_to_parse, out int a))
+            {
+
+            }
+            else
+            {
+           
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("gracz 1 - podaj wartość liczbową, reset rundy");
+                Console.ResetColor();
+                continue;
+            }
+
             Console.WriteLine("gracz drugi:");
-            int b = Convert.ToInt32(Console.ReadLine());
-            nowa_linia();
+            string b_to_parse = (Console.ReadLine());
+            if (int.TryParse(b_to_parse, out int b))
+            {
+
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("gracz 2 - podaj wartość liczbową, reset rundy!");
+                Console.ResetColor();
+                continue;
+            }
 
             //Warunek dla sytuacji w której gracze wybrali liczby z poza przedziału
 
