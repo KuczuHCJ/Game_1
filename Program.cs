@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.Design;
 
 namespace Kamień_papier_nożyce;
@@ -6,14 +7,14 @@ namespace Kamień_papier_nożyce;
 class Program
 {
 
-    
+
     static void Main(string[] args)
-        //Początek gry instrukcja, przywitanie 
+    //Początek gry instrukcja, przywitanie 
     {
         Console.ForegroundColor = ConsoleColor.Blue;
         Console.WriteLine("Hej witaj w mojej grze, polega ona na wybraniu:\n1-Kamień\n2-Nożyce\n3-Papier");
         Console.WriteLine("Zasady są proste kamien wygrywa z nożycami, nożyce z papierem a papier z kamieniem");
-        Console.WriteLine("potrzebujesz kolegi który zaga z toba");
+        Console.WriteLine("możesz w grę zagrać sam z komputerem lub z inną osobą.");
         koniec_koloru();
 
         //wprowadzenie zmiennej odpowiadającej grze z komputerem bazowo true
@@ -22,10 +23,14 @@ class Program
         //pamiętać że b mozna zastąpić wartość w kodzie ale nie mozna jej zadeklarować dwa razy jakieś 1,5h szukałem błędu 
         //po ponownym zadeklarowaniu b w insstrukcjach warunkowych gry z komputerem 
 
+        
         int b = 0;
+       
+
 
         while (true)
         {
+
             Console.WriteLine("Czy chcesz zagrać z innym graaczem? - wybierz 1, czy komputerem? wybierz 2");
             String gvsk = Console.ReadLine();
             if (int.TryParse(gvsk, out int gracz))
@@ -37,13 +42,13 @@ class Program
                     koniec_koloru();
                     continue;
                 }
-                else if(gracz == 1)
+                else if (gracz == 1)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     Console.WriteLine("wybrano grę z innym graczem");
                     koniec_koloru();
                 }
-                else if(gracz == 2)
+                else if (gracz == 2)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
                     Console.WriteLine("wybrano grę z komputerem, powodzenia!");
@@ -65,15 +70,18 @@ class Program
 
         int punkty_całości_1 = 0;
         int punkty_całości_2 = 0;
-        //Instrukcja go to w razie chęci kontynuacji gry 
+       
+    //Instrukcja go to w razie chęci kontynuacji gry 
     Gra:
+        //zmienne licznik do obliczania przebiegu pętli
         int licznik = 0;
         int punkty_1 = 0;
         int punkty_2 = 0;
+       
 
-        
+
         //Pętla jako sama gra 
-        
+
         while (true)
         {
             
@@ -162,8 +170,8 @@ class Program
             }
 
             //Zwiększenie licznika 
-
-            licznik++;
+            
+           
 
             //Warunki remisu 
             if (a == b)
@@ -205,35 +213,47 @@ class Program
 
         //Pytanie o kontynuajcę gry wraz z możliwościa zakończenia
 
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("czy chcesz kontynuować gre? naciśnij 1 jeśli tak, naciśnij 2 jeśli nie");
-        wybór:
-        int Tak_nie = Convert.ToInt32(Console.ReadLine());
+        koniec_koloru();
 
-        
-        //jeśli liczby spoza zakresu go to do wyboru możliwości kontynuacji gry
-    
-        if (1 != Tak_nie && 2 != Tak_nie)
+    wybór:
+
+
+        String tak_nie = Console.ReadLine();
+        if (int.TryParse(tak_nie, out int gra_dalej))
         {
-            czerwony_kolor_tekstu();
-            Console.WriteLine("wybrano nie prawidłową watość!!!");
-            koniec_koloru();
-            goto wybór;
+
+            //jeśli liczby spoza zakresu go to do wyboru możliwości kontynuacji gry
+
+            if (1 != gra_dalej && 2 != gra_dalej)
+            {
+                czerwony_kolor_tekstu();
+                Console.WriteLine("wybrano nie prawidłową watość!!!");
+                koniec_koloru();
+                goto wybór;
+            }
+            //Go to do pętli while jako gry 
+            else if (gra_dalej == 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("zaczynamy kolejną grę");
+                koniec_koloru();
+                goto Gra;
+            }
+            //zakończenie gry 
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("koniec na dziś jeszcze tylko wyniki :)");
+                nowa_linia();
+
+            }
         }
-        //Go to do pętli while jako gry 
-        else if (Tak_nie == 1)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("zaczynamy kolejną grę");
-            koniec_koloru();
-            goto Gra;
-        }
-        //zakończenie gry 
         else
         {
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("koniec na dziś jeszcze tylko wyniki :)");
-            nowa_linia();
-
+            Console.WriteLine("podaj liczbę");
+            goto wybór;
         }
         
         //kod podsumowywujący rozgrywkę
@@ -276,4 +296,6 @@ class Program
     {
         Console.ResetColor();
     }
+
+ 
 }
