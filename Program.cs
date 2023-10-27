@@ -2,8 +2,6 @@
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Collections.Generic;
-using System.IO;
-using System.Xml;
 
 namespace Kamień_papier_nożyce;
 
@@ -149,7 +147,7 @@ class Program
             {
                 goto po_a;
             }
-            else if (a !is int)
+            else if (a !is string)
             {
 
                 Czerwony_kolor_tekstu();
@@ -189,10 +187,19 @@ class Program
 
             //Warunek dla sytuacji w której gracze wybrali liczby z poza przedziału
             po_a:
-
-            if (a > 3 || a < 1)
+            if ((a > 3 || a < 1) && (b > 3 || b < 1))
             {
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                Czerwony_kolor_tekstu();
+                Console.WriteLine("obaj gracze wybrali błędną warość");
+                Console.WriteLine("wybierzcie wartość z przedziału 1-3");
+                Koniec_koloru();
+                Nowa_linia();
+                continue;
+            }
+
+            else if (a > 3 || a < 1)
+            {
+                Czerwony_kolor_tekstu();
                 Console.WriteLine("Gracz pierwszy wybrał liczbę z poza przedziału 1-3");
                 Koniec_koloru();
                 Nowa_linia();
@@ -233,7 +240,6 @@ class Program
                 Console.WriteLine("gracz pierwszy wygrywa");
                 punkty_1++;
                 Koniec_koloru();
-                Nowa_linia();
                 continue;
             }
             //Wygrana gracza 2 
@@ -242,7 +248,6 @@ class Program
                 Console.WriteLine("gracz drugi wygrywa");
                 punkty_2++;
                 Koniec_koloru();
-                Nowa_linia();
                 continue;
             }
 
